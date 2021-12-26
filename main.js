@@ -36,11 +36,72 @@ Student.prototype.aprobarCurso = function(nuevoCurso) {
          this.cursosAprobados.push(nuevoCurso);
      };      //Se anade el metodo en la intancia  de prototipe
 
-const juanita = new Student("Juanita Alejandra", 22, ["Curso de Introduccion a Javascript", "Curso de python basico"]);
 
+//  Protoripos con la sintaxis de clases
+class Student2{
+    constructor(name, age, cursosAprobados) {
+        this.name = name;
+        this.age = age;
+        this.cursosAprobados = cursosAprobados;
+
+    // Creamos el metodo
+    // this.aprobarCurso = function(nuevoCurso) {
+    //     this.cursosAprobados.push(nuevoCurso); 
+    // }
+    }
+    
+
+    aprobarCurso(nuevocurso) {
+        this.cursosAprobados.push(nuevocurso);
+    }
+}
+//ROR   Recibe un objeto retorna  esta opcion es de las mejores para generar clases con paso a entradas incolpletas
+//      Donde entra la posibilidad de que el objeto pueda o no tener el atributo
+class Student3{
+    constructor({
+        name,
+        age,
+        twitter,
+        instagram,
+        facebook,
+        cursosAprobados = [], // valores predeterminados
+        email,
+    }) {
+        this.name = name;
+        this.age = age;
+        this.cursosAprobados = cursosAprobados;
+        this.twitter =  twitter;
+        this.instagram = instagram;
+        this.facebook = facebook;
+        this.email = email;
+
+    // Creamos el metodo
+    // this.aprobarCurso = function(nuevoCurso) {
+    //     this.cursosAprobados.push(nuevoCurso); 
+    // }
+    }
+    
+
+    aprobarCurso(nuevocurso) {
+        this.cursosAprobados.push(nuevocurso);
+    }
+}
+
+const andreita = new Student3( { name: "Andrea", age: 25, cursosAprobados: ["Python POO", "Python intermedio"]})
+const miguelito = new Student2("Miguelito", 8, ["Programacion Orientada a Objetos"])
+const juanita = new Student("Juanita Alejandra", 22, ["Curso de Introduccion a Javascript", "Curso de python basico"]);
+const samario = new Student3({
+    email:"Samario@platzi.com",
+    name:"Samario",
+    age:35,
+    facebook:"Samario57"
+})
 //natalia.cursosAprobados.push("Curso de responsive Design");
+miguelito.aprobarCurso("Introduccion a C++")
 juanita.aprobarCurso("Curso de Unreal Engine");
 
+console.log(miguelito)
 console.log(juanita)
 console.log(juanita.cursosAprobados)
 console.log(natalia.cursosAprobados)
+console.log(samario)
