@@ -1,107 +1,151 @@
-//Todos loa objetos iterabkes heredan el prototipo object
-//Objeto iterable
-const natalia = {
-    //Atributos
-    name: "Natalia",
-    age: 20,
-    cursosAprobados:[
-        "Curso Definitivo de HTML y CSS",
-        "Curso Practico de HTML y CSS"
-    ],
+//  Trabajando con objetos literales vs clases 
 
-    //Creamos un metodo
-    aprobarCurso: function(nuevoCurso) {  // Funcion anonima
-        this.cursosAprobados.push(nuevoCurso);       //Refrenciamos al mismo objeto con this que en este caso seria natalia
+const juan1 = {
+    name: "JuanDc",
+    uysername:"juandc",
+    points:100,
+    socialMedia:{
+        twitter:"fjuandc",
+        instagram:"fjuandc",
+        facebook:""
     },
-
-};  // hereda el protoripo object
-
-// Prototipos en javascript - Objetos en lo cotidiano
-function Student( name, age, cursosAprobados) {
-    //Atributos
-    this.name = name;
-    this.age = age;
-    this.cursosAprobados = cursosAprobados;
-
-
-    // Creamos el metodo
-    // this.aprobarCurso = function(nuevoCurso) {
-    //     this.cursosAprobados.push(nuevoCurso); 
-    // }
-
+    approvedCourses: [
+        "Curso definitivo de html y css",
+        "Curso practico de Html y Css",
+    ],
+    learningPaths: [
+        {
+            name: "Escuela de desarrolo web",
+            courses: [
+                "Curso definitivo de html y css",
+                "Curso practico de Html y Css",
+                "Curso de responsive design",
+            ],
+        },
+        {
+            name:"Escuela de videojuegos",
+            courses:[
+                "curso de introduccion a la produccion de Vgz",
+                "Curso de unreal engine",
+                "Crso de unity 3D",
+            ]
+        }
+    ],
 };
 
-//Creamos ub metodo  en la clase o prototipo por fuera de; scope o del prototipo
-Student.prototype.aprobarCurso = function(nuevoCurso) {
-         this.cursosAprobados.push(nuevoCurso);
-     };      //Se anade el metodo en la intancia  de prototipe
 
 
-//  Protoripos con la sintaxis de clases
-class Student2{
-    constructor(name, age, cursosAprobados) {
+const miguelito = {
+    name: "miguelito",
+    uysername:"miguelitofeliz",
+    points:1000,
+    socialMedia:{
+        twitter:"miguelitofeliz",
+        instagram:"miguelitofeliz",
+        facebook:""
+    },
+    approvedCourses: [
+        "Curso de DataBussiness",
+        "Curso Dataviz",
+    ],
+    learningPaths: [
+        {
+            name: "Escuela de desarrolo web",
+            courses: [
+                "Curso definitivo de html y css",
+                "Curso practico de Html y Css",
+                "Curso de responsive design",
+            ],
+        },
+        {
+            name:"Escuela datascience",
+            courses:[
+                "Curso de DataBussiness",
+                "Curso Dataviz",
+                "Curso de tableu",
+            ]
+        }
+    ],
+};
+
+// Programacion orientada a objetos
+
+
+class learningPaths {
+    constructor({
+        id,
+        name,
+        courses = [],
+    }) {
+        this.id = id;
         this.name = name;
-        this.age = age;
-        this.cursosAprobados = cursosAprobados;
-
-    // Creamos el metodo
-    // this.aprobarCurso = function(nuevoCurso) {
-    //     this.cursosAprobados.push(nuevoCurso); 
-    // }
+        this.courses = courses;
     }
-    
 
-    aprobarCurso(nuevocurso) {
-        this.cursosAprobados.push(nuevocurso);
+    addCourse (course){
+        this.courses.push(course)
+    }
+
+    deleteCourse (oldCourse) {
+        const courseIndex = this.courses.findIndex(
+                course => course.id === oldCourse.id
+            );
+
+        this.courses.splice(courseIndex,1);
     }
 }
-//ROR   Recibe un objeto retorna  esta opcion es de las mejores para generar clases con paso a entradas incolpletas
-//      Donde entra la posibilidad de que el objeto pueda o no tener el atributo
-class Student3{
+class Student {
     constructor({
         name,
-        age,
-        twitter,
-        instagram,
-        facebook,
-        cursosAprobados = [], // valores predeterminados
         email,
+        username,
+        twitter = undefined,
+        instagram = undefined,
+        facebook = undefined,
+        approvedCourses = [],
+        learningPaths = [],
     }) {
-        this.name = name;
-        this.age = age;
-        this.cursosAprobados = cursosAprobados;
-        this.twitter =  twitter;
-        this.instagram = instagram;
-        this.facebook = facebook;
         this.email = email;
-
-    // Creamos el metodo
-    // this.aprobarCurso = function(nuevoCurso) {
-    //     this.cursosAprobados.push(nuevoCurso); 
-    // }
-    }
-    
-
-    aprobarCurso(nuevocurso) {
-        this.cursosAprobados.push(nuevocurso);
+        this.name = name;
+        this.username = username;
+        this.socialMedia = {
+            twitter,
+            instagram,
+            facebook,
+        };
+        this.approvedCourses =  approvedCourses;
+        this.learningPaths =  learningPaths;
     }
 }
 
-const andreita = new Student3( { name: "Andrea", age: 25, cursosAprobados: ["Python POO", "Python intermedio"]})
-const miguelito = new Student2("Miguelito", 8, ["Programacion Orientada a Objetos"])
-const juanita = new Student("Juanita Alejandra", 22, ["Curso de Introduccion a Javascript", "Curso de python basico"]);
-const samario = new Student3({
-    email:"Samario@platzi.com",
-    name:"Samario",
-    age:35,
-    facebook:"Samario57"
-})
-//natalia.cursosAprobados.push("Curso de responsive Design");
-miguelito.aprobarCurso("Introduccion a C++")
-juanita.aprobarCurso("Curso de Unreal Engine");
+const juan2 = new Student({
+    name:"JuanDc",
+    username:"Juanitodc",
+    email:"Juanel@platzi.com",
+    instagram:"jaundc1",
+});
 
-console.log(miguelito)
-console.log(juanita)
-console.log(juanita.cursosAprobados)
-console.log(natalia.cursosAprobados)
-console.log(samario)
+
+const miguelito2 = new Student({
+    name:"Miguelito",
+    username:"MiguelitoFeliz",
+    email:"MiguelitoFeliz@juanito.com",
+    twitter:"MiguelitoDurito"
+})
+
+const desarrolloWeb = new learningPaths({
+        id:1,
+        name:"Escuela de desarrollo Web",
+        courses:[
+            "Courso de Frontend Developer",
+            "Curso definitivo de HTML y CSS",
+        ]
+    }
+)
+
+desarrolloWeb.addCourse("Introduccion a React")
+desarrolloWeb.deleteCourse(1);
+
+console.log(miguelito2);
+console.log(desarrolloWeb);
+
