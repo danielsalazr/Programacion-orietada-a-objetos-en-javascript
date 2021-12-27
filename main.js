@@ -71,7 +71,7 @@ const miguelito = {
 // Programacion orientada a objetos
 
 
-class learningPaths {
+class LearningPaths {
     constructor({
         id,
         name,
@@ -117,12 +117,35 @@ class Student {
         this.learningPaths =  learningPaths;
     }
 }
+// Creando clases de las rutas de aprendisaje
+const desarrolloWeb = new LearningPaths({
+    id:1,
+    name:"Escuela de desarrollo Web",
+    courses:[
+        "Courso de Frontend Developer",
+        "Curso definitivo de HTML y CSS",
+    ]
+})
+
+const python = new LearningPaths( {
+    id:2,
+    name:"Escuela de python",
+    courses:[
+        "Curso de python basico",
+        "Curso de python intermedio",
+    ],
+})
+
 
 const juan2 = new Student({
     name:"JuanDc",
     username:"Juanitodc",
     email:"Juanel@platzi.com",
     instagram:"jaundc1",
+    learningPaths: [
+        desarrolloWeb,
+        python,
+    ],
 });
 
 
@@ -130,22 +153,18 @@ const miguelito2 = new Student({
     name:"Miguelito",
     username:"MiguelitoFeliz",
     email:"MiguelitoFeliz@juanito.com",
-    twitter:"MiguelitoDurito"
+    twitter:"MiguelitoDurito",
+    learningPaths:[
+        python,
+    ],
 })
 
-const desarrolloWeb = new learningPaths({
-        id:1,
-        name:"Escuela de desarrollo Web",
-        courses:[
-            "Courso de Frontend Developer",
-            "Curso definitivo de HTML y CSS",
-        ]
-    }
-)
+
 
 desarrolloWeb.addCourse("Introduccion a React")
 desarrolloWeb.deleteCourse(1);
 
+console.log(juan2)
 console.log(miguelito2);
-console.log(desarrolloWeb);
+//console.log(desarrolloWeb);
 
