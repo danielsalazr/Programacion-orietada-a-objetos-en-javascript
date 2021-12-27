@@ -1,170 +1,158 @@
-//  Trabajando con objetos literales vs clases 
+//  Abstraccion
 
-const juan1 = {
-    name: "JuanDc",
-    uysername:"juandc",
-    points:100,
-    socialMedia:{
-        twitter:"fjuandc",
-        instagram:"fjuandc",
-        facebook:""
-    },
-    approvedCourses: [
-        "Curso definitivo de html y css",
-        "Curso practico de Html y Css",
-    ],
-    learningPaths: [
-        {
-            name: "Escuela de desarrolo web",
-            courses: [
-                "Curso definitivo de html y css",
-                "Curso practico de Html y Css",
-                "Curso de responsive design",
-            ],
-        },
-        {
-            name:"Escuela de videojuegos",
-            courses:[
-                "curso de introduccion a la produccion de Vgz",
-                "Curso de unreal engine",
-                "Crso de unity 3D",
-            ]
-        }
-    ],
-};
+//  Es armar las clases a partir del comportamiento real de las cosas para su uso en programacion
 
 
-
-const miguelito = {
-    name: "miguelito",
-    uysername:"miguelitofeliz",
-    points:1000,
-    socialMedia:{
-        twitter:"miguelitofeliz",
-        instagram:"miguelitofeliz",
-        facebook:""
-    },
-    approvedCourses: [
-        "Curso de DataBussiness",
-        "Curso Dataviz",
-    ],
-    learningPaths: [
-        {
-            name: "Escuela de desarrolo web",
-            courses: [
-                "Curso definitivo de html y css",
-                "Curso practico de Html y Css",
-                "Curso de responsive design",
-            ],
-        },
-        {
-            name:"Escuela datascience",
-            courses:[
-                "Curso de DataBussiness",
-                "Curso Dataviz",
-                "Curso de tableu",
-            ]
-        }
-    ],
-};
-
-// Programacion orientada a objetos
-
-
-class LearningPaths {
+class Classes{
     constructor({
+        name,
         id,
-        name,
-        courses = [],
+        teacher,
+        videoLink,
+        comments = [],
+        contribution = [],
+        questions = [],
+        resources= [],
+        
     }) {
-        this.id = id;
         this.name = name;
-        this.courses = courses;
-    }
-
-    addCourse (course){
-        this.courses.push(course)
-    }
-
-    deleteCourse (oldCourse) {
-        const courseIndex = this.courses.findIndex(
-                course => course.id === oldCourse.id
-            );
-
-        this.courses.splice(courseIndex,1);
+        this.id = id;
+        this.teacher = teacher;
+        this.videoLink = videoLink;
+        this.comments = comments;
+        this.contribution = contribution;
+        this.questions = questions;
+        this.resources = resources;
     }
 }
-class Student {
+
+const abstraccionEnJavascript = new Classes({
+    name:"Abstraccion en Javascript",
+    teacher:"Juan David Castro",
+    id:"few646w26g4wr6fwwfer",
+    comments:["Ya nadie usa Facebook",],
+    videoLink:"https://platzi.com/videos/chuchuwa_chuchuwa",
+
+})
+class Course {
     constructor({
         name,
-        email,
-        username,
-        twitter = undefined,
-        instagram = undefined,
-        facebook = undefined,
-        approvedCourses = [],
-        learningPaths = [],
+        classes = [],
+        comments = []
     }) {
-        this.email = email;
         this.name = name;
-        this.username = username;
-        this.socialMedia = {
-            twitter,
-            instagram,
-            facebook,
-        };
-        this.approvedCourses =  approvedCourses;
-        this.learningPaths =  learningPaths;
+        this.clases = classes;
+        comments = comments
     }
 }
-// Creando clases de las rutas de aprendisaje
-const desarrolloWeb = new LearningPaths({
-    id:1,
-    name:"Escuela de desarrollo Web",
+
+const cursoProgBasica = new Course({
+    name:"Curso Gratis de programacion Basica",
+})
+const cursoDefinitivoHTML = new Course({
+    name:"Curso definitivo de HTML",
+})
+const cursoPracticoHTML = new Course({
+    name:"Curso practico de HTML",
+})
+const cursoPooJavascript = new Course({
+    name:"Curso de programacion oientado a objetos con javascript",
+    classes: ["Que es abstraccion", abstraccionEnJavascript],
+})
+
+class LearningPath {
+  constructor({
+    name,
+    courses = [],
+  }) {
+    this.name = name;
+    this.courses = courses;
+  }
+}
+
+const escuelaJavascript = new LearningPath({
+    name:"Escuela de Javascript",
     courses:[
-        "Courso de Frontend Developer",
-        "Curso definitivo de HTML y CSS",
+        "Javascript Basico",
+        cursoPooJavascript,
     ]
 })
 
-const python = new LearningPaths( {
-    id:2,
-    name:"Escuela de python",
-    courses:[
-        "Curso de python basico",
-        "Curso de python intermedio",
-    ],
-})
-
-
-const juan2 = new Student({
-    name:"JuanDc",
-    username:"Juanitodc",
-    email:"Juanel@platzi.com",
-    instagram:"jaundc1",
-    learningPaths: [
-        desarrolloWeb,
-        python,
-    ],
+const escuelaWeb = new LearningPath({
+  name: "Escuela de Desarrollo Web",
+  courses: [
+    cursoProgBasica,
+    cursoDefinitivoHTML,
+    cursoPracticoHTML,
+  ],
 });
 
 
-const miguelito2 = new Student({
-    name:"Miguelito",
-    username:"MiguelitoFeliz",
-    email:"MiguelitoFeliz@juanito.com",
-    twitter:"MiguelitoDurito",
-    learningPaths:[
-        python,
-    ],
+
+const escuelaData = new LearningPath({
+  name: "Escuela de Data Science",
+  courses: [
+    cursoProgBasica,
+    "Curso DataBusiness",
+    "Curso Dataviz",
+  ],
+});
+
+const escuelaVgs = new LearningPath({
+  name: "Escuela de Vidweojuegos",
+  courses: [
+    cursoProgBasica,
+    "Curso de Unity",
+    "Curso de Unreal",
+  ],
 })
 
+class Student {
+  constructor({
+    name,
+    email,
+    username,
+    twitter = undefined,
+    instagram = undefined,
+    facebook = undefined,
+    approvedCourses = [],
+    learningPaths = [],
+  }) {
+    this.name = name;
+    this.email = email;
+    this.username = username;
+    this.socialMedia = {
+      twitter,
+      instagram,
+      facebook,
+    };
+    this.approvedCourses = approvedCourses;
+    this.learningPaths = learningPaths;
+  }
+}
 
+const juan2 = new Student({
+  name: "JuanDC",
+  username: "juandc",
+  email: "juanito@juanito.com",
+  twitter: "fjuandc",
+  learningPaths: [
+    escuelaWeb,
+    escuelaVgs,
+    escuelaJavascript,
+  ],
+});
 
-desarrolloWeb.addCourse("Introduccion a React")
-desarrolloWeb.deleteCourse(1);
+const miguelito2 = new Student({
+  name: "Miguelito",
+  username: "migelitofeliz",
+  email: "miguelito@juanito.com",
+  instagram: "migelito_feliz",
+  learningPaths: [
+    escuelaWeb,
+    escuelaData,
+  ],
+});
 
-console.log(juan2)
-console.log(miguelito2);
-//console.log(desarrolloWeb);
-
+console.log(juan2);
+console.log(juan2.learningPaths[2].courses[1]);    //Llamada a los cursos de la primera carrera de juan2
