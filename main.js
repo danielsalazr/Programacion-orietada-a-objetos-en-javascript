@@ -1,6 +1,25 @@
 //  Abstraccion
 
 //  Es armar las clases a partir del comportamiento real de las cosas para su uso en programacion
+class Comment {
+  constructor({
+    content,
+    studentName,
+    studentRole = "estudiante",
+  }) {
+    this.content = content;
+    this.studentName = studentName;
+    this.studentRole = studentRole;
+    this.likes = 0;
+  }
+
+  publicar (){
+    console.log(this.studentName + " (" + this,this.studentRole+")");
+    console.log(this.likes + " Likes");
+    console.log(this.content);
+  }
+}
+
 class PlatziClass {
   constructor( {
     name,
@@ -176,6 +195,14 @@ class Student {
     this.learningPaths = learningPaths;
   }
 
+  publicarComentario(commentContent){
+    const comment = new Comment({
+      content: commentContent,
+      studentName: this.name,
+    })
+    comment.publicar();
+  }
+
 }
 
 //Aplicando herencia a nuevas clases que heredaran la clase Student
@@ -216,6 +243,29 @@ class ExpertStudent extends Student{
     }
 }
 
+class TeacherStudent extends Student {
+  constructor(props){
+      super(props) //Heredamos el constructor de la clase madre
+  }
+
+  approveCourse(newCourse){
+      this.approvedCourses.push(newCourse);
+  }
+
+  publicarComentario(commentContent){
+    const comment = new Comment({
+      content: commentContent,
+      studentName: this.name,
+      studentRole: "Professor",
+    })
+    comment.publicar();
+  }
+
+
+}
+
+// class 
+
 
 const juan2 = new FreeStudent({
   name: "JuanDC",
@@ -239,6 +289,14 @@ const miguelito2 = new BasicStudent({
     escuelaData,
   ],
 });
+
+const freddy = new TeacherStudent({
+  name: "Freddy Vega",
+  username: "Freddier",
+  email: "freddier@juanito.com",
+  instagram: "freddiert",
+  
+})
 
 //console.log(juan2);
 //console.log(juan2.learningPaths[2].courses[1]);    //Llamada a los cursos de la primera carrera de juan2
