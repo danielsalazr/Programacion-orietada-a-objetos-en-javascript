@@ -62,11 +62,15 @@ class Course {
     constructor({
         name,
         classes = [],
-        comments = []
+        comments = [],
+        isFree = false,
+        lang = "spanish",
     }) {
         this._name = name;    //_ Convencion para decir que una variable e privada
         this.clases = classes;
-        comments = comments
+        this.comments = comments;
+        this.isFree = isFree;
+        this.lang = lang;
     }
 
     // utilizamos los getters y setters  para poder cumplir con la tarea del ecapsulamiento de proteger las cosas en las maneras que necesitemos
@@ -85,47 +89,16 @@ class Course {
     }
 }
 
-/*  Encapsulamiento  utilizando la notacion de prototipos anterior de ecmascript
-"use strict";
-
-function Student(name, age, nationality) {
-  this._name = name;
-  this._age = age;
-  this.nationality = nationality;
-}
-
-Student.prototype = {
-  get name() {
-    return this._name;
-  },
-  set name(newName) {
-    this._name = newName;
-  },
-
-  get age() {
-    return this._age;
-  },
-
-  set age(newAge) {
-    this._age = newAge;
-  },
-};
-
-let edgar = new Student("Edgar", 25, "Mexico");
-edgar.name = "Juan";
-edgar.age = 30
-console.log(edgar);
-
-*/
-
 const cursoProgBasica = new Course({
     name:"Curso Gratis de programacion Basica",
+    isFree: true,
 })
 const cursoDefinitivoHTML = new Course({
     name:"Curso definitivo de HTML",
 })
 const cursoPracticoHTML = new Course({
     name:"Curso practico de HTML",
+    lang:"english"
 })
 const cursoPooJavascript = new Course({
     name:"Curso de programacion oientado a objetos con javascript",
@@ -179,6 +152,7 @@ const escuelaVgs = new LearningPath({
   ],
 })
 
+// Para Herencia haremos Student nuestra superclase
 class Student {
   constructor({
     name,
@@ -201,9 +175,49 @@ class Student {
     this.approvedCourses = approvedCourses;
     this.learningPaths = learningPaths;
   }
+
 }
 
-const juan2 = new Student({
+//Aplicando herencia a nuevas clases que heredaran la clase Student
+class FreeStudent extends Student{
+    constructor(props){
+        super(props) //Heredamos el constructor de la clase madre
+    }
+
+    approveCourse(newCourse){
+        if(newCourse.isFree){
+          this.approvedCourses.push(newCourse);
+        } else  {
+          console.warn("Lo sentimos " + this.name + " Solo puedes tomar cursos abiertos")
+        }
+    }
+}
+class BasicStudent extends Student{
+    constructor(props){
+        super(props) //Heredamos el constructor de la clase madre
+    }
+
+    approveCourse(newCourse){
+      if(newCourse.lang !== "english"){
+        this.approvedCourses.push(newCourse);
+      } else  {
+        console.warn("Lo sentimos " + this.name + " No puedes tomar cursos en ingles")
+      }
+    }
+}
+
+class ExpertStudent extends Student{
+    constructor(props){
+        super(props) //Heredamos el constructor de la clase madre
+    }
+
+    approveCourse(newCourse){
+        this.approvedCourses.push(newCourse);
+    }
+}
+
+
+const juan2 = new FreeStudent({
   name: "JuanDC",
   username: "juandc",
   email: "juanito@juanito.com",
@@ -215,7 +229,7 @@ const juan2 = new Student({
   ],
 });
 
-const miguelito2 = new Student({
+const miguelito2 = new BasicStudent({
   name: "Miguelito",
   username: "migelitofeliz",
   email: "miguelito@juanito.com",
@@ -226,5 +240,5 @@ const miguelito2 = new Student({
   ],
 });
 
-console.log(juan2);
-console.log(juan2.learningPaths[2].courses[1]);    //Llamada a los cursos de la primera carrera de juan2
+//console.log(juan2);
+//console.log(juan2.learningPaths[2].courses[1]);    //Llamada a los cursos de la primera carrera de juan2
