@@ -40,11 +40,59 @@ class Course {
         classes = [],
         comments = []
     }) {
-        this.name = name;
+        this._name = name;    //_ Convencion para decir que una variable e privada
         this.clases = classes;
         comments = comments
     }
+
+    // utilizamos los getters y setters  para poder cumplir con la tarea del ecapsulamiento de proteger las cosas en las maneras que necesitemos
+
+    get name () { //getter
+        return this._name;
+    }
+    
+    set name (nuevoNombre){ // Setter
+        if (nuevoNombre === "Curso malo de programacion basica") {
+          console.error("Web... no")
+        } else {
+          this._name = nuevoNombre;
+        }
+        
+    }
 }
+
+/*  Encapsulamiento  utilizando la notacion de prototipos anterior de ecmascript
+"use strict";
+
+function Student(name, age, nationality) {
+  this._name = name;
+  this._age = age;
+  this.nationality = nationality;
+}
+
+Student.prototype = {
+  get name() {
+    return this._name;
+  },
+  set name(newName) {
+    this._name = newName;
+  },
+
+  get age() {
+    return this._age;
+  },
+
+  set age(newAge) {
+    this._age = newAge;
+  },
+};
+
+let edgar = new Student("Edgar", 25, "Mexico");
+edgar.name = "Juan";
+edgar.age = 30
+console.log(edgar);
+
+*/
 
 const cursoProgBasica = new Course({
     name:"Curso Gratis de programacion Basica",
