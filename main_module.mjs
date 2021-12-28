@@ -1,7 +1,17 @@
 //  Abstraccion
 
 //  Es armar las clases a partir del comportamiento real de las cosas para su uso en programacion
-class PlatziClass {
+    function videoPlay(id) {
+        const urlSecreta = "https:Platziurl.com/video/"+ id;
+        console.log("Se esta reproduciendo la url" + urlSecreta);
+    }
+    
+    function videoStop (id){
+      const urlSecreta = "https:Platziurl.com/video/"+ id;
+      console.log("Pausamos la url" + urlSecreta);
+    }
+
+export class PlatziClass {
   constructor( {
     name,
     videoID,
@@ -18,15 +28,7 @@ class PlatziClass {
   }
 }
 
-function videoPlay(id) {
-const urlSecreta = "https:Platziurl.com/video/"+ id;
-console.log("Se esta reproduciendo la url" + urlSecreta);
-}
 
-function videoStop (id){
-  const urlSecreta = "https:Platziurl.com/video/"+ id;
-  console.log("Pausamos la url" + urlSecreta);
-}
 class Classes{
     constructor({
         name,
@@ -226,5 +228,5 @@ const miguelito2 = new Student({
   ],
 });
 
-console.log(juan2);
-console.log(juan2.learningPaths[2].courses[1]);    //Llamada a los cursos de la primera carrera de juan2
+//console.log(juan2);
+//console.log(juan2.learningPaths[2].courses[1]);    //Llamada a los cursos de la primera carrera de juan2
